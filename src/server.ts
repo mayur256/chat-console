@@ -4,7 +4,7 @@
 // common module imports
 import { Server, createServer, Socket } from "net";
 
-const TCP_PORT = 8124;
+const TCP_PORT = 5124;
 
 // Create an instance of TCP socket server
 const server: Server = createServer((socket: Socket): void => {

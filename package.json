@@ -8,9 +8,8 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "start": "node dist/app.js",
-        "dev": "ts-node src/server.ts",
-        "build": "tsc -p ."
+        "server": "ts-node src/server.ts",
+        "client": "ts-node src/client.ts"
     },
     "devDependencies": {
         "@types/node": "^18.14.1",
