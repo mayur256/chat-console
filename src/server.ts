@@ -12,9 +12,9 @@ const server: Server = createServer((serverSocket: Socket): void => {
    // Receives data from client socket
     serverSocket.on('data', (data: Buffer | string): void => {
         console.log(data.toString());
-    });
 
-    serverSocket.write("Greetings from Server! \r\n");
+        serverSocket.write(data.toString());
+    });    
 });
 
 // Error handler on server
