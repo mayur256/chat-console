@@ -26,7 +26,14 @@ const client: Socket = createConnection({ port: TCP_PORT }, (): void => {
 
     // listen for data on the socket
     client.on('data', (data: Buffer | string) => {
-        console.log("Server echoed: ", data.toString());
+        const echoedMsg = data.toString();
+        console.log("Server echoed: ", echoedMsg);
+
+        if (echoedMsg.toLocaleLowerCase() === "bye") {
+            client.destroy();
+            process.exit(0);
+        }
+
         console.log("Client Message : ");
     });
 });

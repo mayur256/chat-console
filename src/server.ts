@@ -11,9 +11,8 @@ const server: Server = createServer((serverSocket: Socket): void => {
    
    // Receives data from client socket
     serverSocket.on('data', (data: Buffer | string): void => {
-        console.log(data.toString());
-
-        serverSocket.write(data.toString());
+        const clientMsg = data.toString('utf-8');
+        serverSocket.write(clientMsg);
     });    
 });
 
