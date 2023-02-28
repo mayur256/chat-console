@@ -6,6 +6,7 @@ import { Socket, createConnection } from "net";
 import { TCP_PORT } from "./constants";
 import * as readline from "node:readline";
 
+let socketId: string | null = null;
 // Create a socket connection
 const client: Socket = createConnection({ port: TCP_PORT }, (): void => {
     // 'connect' listener.
@@ -17,23 +18,26 @@ const client: Socket = createConnection({ port: TCP_PORT }, (): void => {
         output: process.stdout
     });
 
-    console.log("Initiate communication")
     console.log("Client Message : ")
     rwInterface.on('line', (line) => {
-        console.log("Client Message : ");
         client.write(line);
     })
 
     // listen for data on the socket
     client.on('data', (data: Buffer | string) => {
         const echoedMsg = data.toString();
-        console.log("Server echoed: ", echoedMsg);
+
+        if (echoedMsg.includes('socketId')) {
+            socketId = JSON.parse(echoedMsg).socketId;
+            return;
+        }
 
         if (echoedMsg.toLocaleLowerCase() === "bye") {
             client.destroy();
             process.exit(0);
         }
 
+        console.log("Server echoed: ", echoedMsg);
         console.log("Client Message : ");
     });
 });

@@ -5,15 +5,23 @@
 import { Server, createServer, Socket } from "net";
 import { TCP_PORT } from "./constants";
 
+const sockets = [];
+
 // Create an instance of TCP socket server
-const server: Server = createServer((serverSocket: Socket): void => {
+const server: Server = createServer((socket: Socket): void => {
     console.log('A client connected');
-   
-   // Receives data from client socket
-    serverSocket.on('data', (data: Buffer | string): void => {
+
+    const id = Math.floor(Math.random() * 100000);
+    sockets.push({ socket });
+
+    // Assign an id to client socket
+    socket.write(JSON.stringify({ socketId: id }));
+
+    // Receives data from client socket
+    socket.on('data', (data: Buffer | string): void => {
         const clientMsg = data.toString('utf-8');
-        serverSocket.write(clientMsg);
-    });    
+        socket.write(clientMsg);
+    });
 });
 
 // Error handler on server
