@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Websocket client</title>
+	<style type="text/css">
+		body{
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
+</head>
+<body>
+	<h2>An exhibit client</h2>&nbsp;&nbsp;
+	<form>
+		<input />
+		<button>Send</button>
+	</form>
+
+	<script type="text/javascript">
+		const socket = new WebSocket("ws://127.0.0.1:5124");
+
+		socket.addEventListener("message", (message) => console.log(message));
+
+		socket.addEventListener("error", (error) => console.log(error))
+	</script>
+</body>
+</html>
