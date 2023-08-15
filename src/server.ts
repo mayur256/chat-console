@@ -20,7 +20,13 @@ const server: Server = createServer((socket: Socket): void => {
     // Receives data from client socket
     socket.on('data', (data: Buffer | string): void => {
         const clientMsg = data.toString('utf-8');
-        socket.write(clientMsg);
+        console.log(`Client says: ${clientMsg}`);
+        socket.write(clientMsg); // re-transmitting the message back to client
+    });
+
+    // Client gets disconnected
+    socket.on('end', (): void => {
+        console.log(`Client disconnected`);
     });
 });
 
