@@ -11,3 +11,5 @@ Let's discuss entites involved in the communication at length
 - In our example, the server merely decodes the message and echoes it to the client as an acknowledgement.
 
 ## Client
+- A process on client machine initiates connection with the TCP server by invoking **createConnection** method from Node's Net module.
+- The client waits to receive data ehoed from the server and closes the connection by invoking **destroy** method on client socket, when server echoes a special message that denotes client wishes to close the connection.
